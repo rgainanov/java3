@@ -35,7 +35,7 @@ public class Box<T extends Fruit> {
     }
 
     public boolean compare(Box<? extends Fruit> another) {
-        return Math.abs(this.getBoxWeight() - another.getBoxWeight()) > 0.000001;
+        return Math.abs(this.getBoxWeight() - another.getBoxWeight()) < 0.000001;
     }
 
     public void moveFruitFromOneBoxToAnother(Box<T> another) {

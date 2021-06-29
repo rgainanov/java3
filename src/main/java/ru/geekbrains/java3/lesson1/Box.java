@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Box<T extends Fruit> {
-    private List<Float> fruits = new ArrayList<Float>();
+    private List<Fruit> fruits = new ArrayList<>();
     private float boxWeight;
 
     public Box() {
         this.boxWeight = 0.0f;
     }
 
-    public List<Float> getFruits() {
+    public List<Fruit> getFruits() {
         return fruits;
     }
 
@@ -21,14 +21,12 @@ public class Box<T extends Fruit> {
     }
 
     public void addFruit(T fruit) {
-        if (fruit.getMyBox() == null) {
-            fruit.setMyBox(this);
-            fruits.add(fruit.getFruitWeight());
+        if (!fruit.checkIfIsInTheBox()) {
+            fruits.add(fruit);
             boxWeight += fruit.getFruitWeight();
-        } else if (fruit.getMyBox() == this) {
-            System.out.println("fruit is already in this box");
+            fruit.putIntoBox();
         } else {
-            System.out.println("fruit is in another box");
+            System.out.println("can't put fruit into the box");
         }
     }
 
@@ -37,13 +35,13 @@ public class Box<T extends Fruit> {
     }
 
     public boolean compare(Box<? extends Fruit> another) {
-        return (this.getBoxWeight() == another.getBoxWeight());
+        return Math.abs(this.getBoxWeight() - another.getBoxWeight()) < 0.000001;
     }
 
     public void moveFruitFromOneBoxToAnother(Box<T> another) {
-        for (Float f : another.getFruits()) {
+        for (Fruit f : another.getFruits()) {
             fruits.add(f);
-            boxWeight += f;
+            boxWeight += f.getFruitWeight();
         }
         another.clearArrayListAndWeightWhenFruitMoved();
     }

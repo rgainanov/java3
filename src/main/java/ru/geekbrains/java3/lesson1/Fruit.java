@@ -1,15 +1,11 @@
 package ru.geekbrains.java3.lesson1;
 
 public abstract class Fruit {
-    private Box<?> myBox;
+    boolean isInTheBox;
 
-    public Box<?> getMyBox() {
-        return myBox;
-    }
+    protected abstract void putIntoBox();
 
-    public void setMyBox(Box<?> myBox) {
-        this.myBox = myBox;
-    }
+    protected abstract boolean checkIfIsInTheBox();
 
-    public abstract Float getFruitWeight();
+    protected abstract Float getFruitWeight();
 }
